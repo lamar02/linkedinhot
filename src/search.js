@@ -1,19 +1,46 @@
 const SERPER_API = 'https://google.serper.dev/news';
 
 const THEME_QUERIES = {
-  'UX Research & Insights': ['UX research methodology insights site:nngroup.com OR site:smashingmagazine.com OR site:uxdesign.cc 2026', 'user research trends product design 2026'],
-  'Product Design Stories': ['product design case study app redesign 2026', 'UX product design lessons learned startup'],
-  'Flutter Development Tips': ['Flutter 3 update news 2026 site:flutter.dev OR site:medium.com', 'Flutter mobile app development tips 2026'],
-  'Design System & Best Practices': ['Figma new feature update 2026', 'design system component library 2026 product team'],
-  'GovTech & Fintech Cases': ['fintech mobile app Africa UX 2026', 'digital payment Africa user experience'],
-  'Expérience & Challenges': ['UX designer career growth 2026', 'product designer remote work challenges'],
-  'Product Strategy & Business': ['design ROI user experience business impact 2026', 'product strategy UX conversion rate'],
+  'UX Research & Insights': [
+    'UX research insights 2026 site:nngroup.com OR site:uxdesign.cc',
+    'user research method discovery product 2026',
+  ],
+  'Product Design Stories': [
+    'product design case study redesign results 2026',
+    'app redesign UX impact business 2026',
+  ],
+  'Tech & Startups en Afrique': [
+    'startup tech Afrique Côte d\'Ivoire Abidjan 2026',
+    'African tech ecosystem fintech mobile 2026',
+    'Afrique numérique innovation startup 2026',
+  ],
+  'Design System & Flutter': [
+    'Figma Config 2026 update features',
+    'Flutter 3 update mobile development 2026',
+    'design system component library team 2026',
+  ],
+  'Actualités Tech & IA': [
+    'AI tools designers product 2026',
+    'Figma AI feature announcement 2026',
+    'intelligence artificielle design UX 2026',
+    'Apple Google Microsoft AI product update 2026',
+  ],
+  'Expérience & Vie de Créatif': [
+    'freelance designer career Africa remote work 2026',
+    'créatif indépendant Afrique travail 2026',
+  ],
+  'Business & Impact': [
+    'design ROI business impact startup 2026',
+    'UX conversion rate business growth 2026',
+    'digital business Côte d\'Ivoire 2026',
+  ],
 };
 
 const GLOBAL_QUERIES = [
-  'Figma AI features update 2026',
-  'AI UX design tools product designers 2026',
-  'mobile app UX trends 2026 site:uxdesign.cc OR site:smashingmagazine.com',
+  'Figma major update AI 2026',
+  'tech news Africa startup funding 2026',
+  'AI product design tools update 2026',
+  'application mobile tendance Afrique 2026',
 ];
 
 export async function searchTrends(themeName) {
