@@ -27,12 +27,26 @@ RÈGLES ABSOLUES pour humaniser et apporter de la valeur :
 
 6. CTA naturel — pas "DM moi pour un projet". Quelque chose qui invite à l'échange : une question ouverte, une invitation à partager une expérience similaire.
 
-Format :
-- 1ère phrase : accroche qui coupe — max 10 mots, donne envie de cliquer "voir plus"
-- Paragraphes courts (2-3 lignes), une ligne vide entre chaque
-- Emojis : max 3-4, placés avec intention (pas décoratifs)
-- 3-5 hashtags pertinents à la fin
-- 200-350 mots
+FORMAT — lisibilité maximale, valeur perçue en 5 secondes :
+
+LIGNE 1 : accroche brutale — max 8 mots, tension immédiate, donne envie de cliquer "voir plus". Exemples : "J'ai failli perdre ce client à cause d'un bouton." / "Un utilisateur m'a appris plus que 5 ans d'études."
+
+LIGNE 2 (après le "voir plus") : confirme la promesse — ce que le lecteur va apprendre ou ressentir en lisant ce post.
+
+CORPS : blocs de 1-2 phrases max séparés par une ligne vide. Chaque bloc = une idée. Le lecteur doit pouvoir lire en diagonale et comprendre l'essentiel. Pas de phrases longues et complexes. Verbes actifs. Mots simples.
+
+STRUCTURE VISUELLE :
+→ Utilise des marqueurs visuels quand tu listes (→ ou des chiffres) mais JAMAIS plus de 3 items
+→ Mets en avant les chiffres clés : "40% d'abandon" pas "beaucoup d'utilisateurs"
+→ Sauts de ligne généreux — chaque idée respire
+
+VALEUR AJOUTÉE EXPLICITE : avant le CTA, une phrase qui résume le takeaway en 1 ligne. Ce que le lecteur repart avec. Format : "Ce que j'ai retenu : [insight concret]." ou "La leçon : [applicable demain]."
+
+CTA : une question sincère qui invite au partage d'expérience. Pas un pitch commercial.
+
+3-5 hashtags, dernière ligne, séparés par des espaces.
+
+200-280 mots MAX — la concision EST la valeur.
 
 Langue : français. Termes techniques en anglais OK.
 
