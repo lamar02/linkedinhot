@@ -1,19 +1,19 @@
 const SERPER_API = 'https://google.serper.dev/news';
 
 const THEME_QUERIES = {
-  'UX Research & Insights': ['UX research insights 2026', 'user research trends design'],
-  'Product Design Stories': ['product design case study 2026', 'design thinking startup'],
-  'Flutter Development Tips': ['Flutter framework news 2026', 'Flutter mobile development'],
-  'Design System & Best Practices': ['design system trends 2026', 'Figma new features'],
-  'GovTech & Fintech Cases': ['fintech Africa mobile 2026', 'GovTech digital services'],
-  'Expérience & Challenges': ['UX designer career 2026', 'product designer challenges'],
-  'Product Strategy & Business': ['design ROI business impact 2026', 'product strategy UX'],
+  'UX Research & Insights': ['UX research methodology insights site:nngroup.com OR site:smashingmagazine.com OR site:uxdesign.cc 2026', 'user research trends product design 2026'],
+  'Product Design Stories': ['product design case study app redesign 2026', 'UX product design lessons learned startup'],
+  'Flutter Development Tips': ['Flutter 3 update news 2026 site:flutter.dev OR site:medium.com', 'Flutter mobile app development tips 2026'],
+  'Design System & Best Practices': ['Figma new feature update 2026', 'design system component library 2026 product team'],
+  'GovTech & Fintech Cases': ['fintech mobile app Africa UX 2026', 'digital payment Africa user experience'],
+  'Expérience & Challenges': ['UX designer career growth 2026', 'product designer remote work challenges'],
+  'Product Strategy & Business': ['design ROI user experience business impact 2026', 'product strategy UX conversion rate'],
 };
 
 const GLOBAL_QUERIES = [
-  'Figma update features 2026',
-  'AI design tools trending 2026',
-  'UX UI design trends 2026',
+  'Figma AI features update 2026',
+  'AI UX design tools product designers 2026',
+  'mobile app UX trends 2026 site:uxdesign.cc OR site:smashingmagazine.com',
 ];
 
 export async function searchTrends(themeName) {
