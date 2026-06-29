@@ -1,8 +1,8 @@
-import { put, list } from '@vercel/blob';
+import { put, get } from '@vercel/blob';
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN;
+const USE_BLOB = !!(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 
 export async function readData(filename) {
   if (!USE_BLOB) {
@@ -14,11 +14,14 @@ export async function readData(filename) {
     }
   }
 
-  const { blobs } = await list({ prefix: `linkedin-hot/${filename}` });
-  if (blobs.length === 0) return null;
-  const res = await fetch(blobs[0].url, { cache: 'no-store' });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const blob = await get(`linkedin-hot/${filename}`, { access: 'private' });
+    if (!blob) return null;
+    const text = await new Response(blob.stream).text();
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
 }
 
 export async function writeData(filename, data) {
@@ -29,7 +32,7 @@ export async function writeData(filename, data) {
   }
 
   await put(`linkedin-hot/${filename}`, JSON.stringify(data, null, 2), {
-    access: 'public',
+    access: 'private',
     addRandomSuffix: false,
     allowOverwrite: true,
     contentType: 'application/json',
@@ -39,7 +42,6 @@ export async function writeData(filename, data) {
 export const DEFAULTS = {
   'schedule.json': {
     themeIndex: 0,
-    weekNumber: 1,
     lastPostDate: null,
     postCount: 0,
   },

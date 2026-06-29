@@ -1,12 +1,9 @@
 import { verifyKey } from 'discord-interactions';
-import { readOrInit, writeData } from '../src/storage.js';
-import { generatePost } from '../src/claude.js';
-import { sendPost, InteractionResponseType } from '../src/discord.js';
-import { getTheme } from '../src/themes.js';
-import { generateWeeklySummary, getLastUntrackedPost } from '../src/stats.js';
-import { getPostDaysLabel } from '../src/scheduler.js';
+import { waitUntil } from '@vercel/functions';
 
 export const config = { api: { bodyParser: false } };
+
+const DISCORD_API = 'https://discord.com/api/v10';
 
 function getRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -17,8 +14,12 @@ function getRawBody(req) {
   });
 }
 
-function respond(res, type, content) {
-  res.status(200).json({ type, data: content ? { content, flags: 64 } : undefined });
+async function followUp(appId, token, content) {
+  await fetch(`${DISCORD_API}/webhooks/${appId}/${token}/messages/@original`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content }),
+  });
 }
 
 export default async function handler(req, res) {
@@ -33,107 +34,112 @@ export default async function handler(req, res) {
 
   const interaction = JSON.parse(rawBody.toString());
 
-  // PING
   if (interaction.type === 1) {
-    return res.status(200).json({ type: InteractionResponseType.PONG });
+    return res.status(200).json({ type: 1 });
   }
 
-  // Slash commands
   if (interaction.type === 2) {
     const { name, options = [] } = interaction.data;
+    const appId = process.env.DISCORD_APPLICATION_ID;
+    const token = interaction.token;
     const opt = (key) => options.find(o => o.name === key)?.value ?? null;
 
-    try {
-      if (name === 'stats') {
-        const postsData = await readOrInit('posts.json');
-        const post = getLastUntrackedPost(postsData.posts);
+    // Garder la fonction Vercel active jusqu'à la fin du travail async
+    waitUntil(handleCommand(name, opt, appId, token));
 
-        if (!post) {
-          return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            '❌ Aucun post sans stats trouvé. Génère un nouveau post avec `/generate`.');
-        }
-
-        post.stats = {
-          vues: opt('vues'),
-          likes: opt('likes'),
-          commentaires: opt('commentaires'),
-          clics: opt('clics'),
-          updatedAt: new Date().toISOString(),
-        };
-
-        await writeData('posts.json', postsData);
-
-        const lines = [
-          `✅ **Stats sauvegardées** pour le post du ${post.id} (${post.theme})`,
-          opt('vues') ? `👀 Vues : ${Number(opt('vues')).toLocaleString('fr-FR')}` : null,
-          opt('likes') ? `❤️ Likes : ${opt('likes')}` : null,
-          opt('commentaires') ? `💬 Commentaires : ${opt('commentaires')}` : null,
-          opt('clics') ? `🔗 Clics : ${opt('clics')}` : null,
-        ].filter(Boolean).join('\n');
-
-        return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, lines);
-      }
-
-      if (name === 'summary') {
-        const postsData = await readOrInit('posts.json');
-        const summary = generateWeeklySummary(postsData.posts);
-        return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, summary);
-      }
-
-      if (name === 'next') {
-        const schedule = await readOrInit('schedule.json');
-        const nextTheme = getTheme(schedule.themeIndex);
-        const postDays = getPostDaysLabel();
-        const msg = [
-          `📅 **Prochain post**`,
-          `Thème : ${nextTheme.emoji} **${nextTheme.name}**`,
-          `Jours de post cette semaine : ${postDays}`,
-          `Posts générés au total : ${schedule.postCount}`,
-        ].join('\n');
-        return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, msg);
-      }
-
-      if (name === 'generate') {
-        const schedule = await readOrInit('schedule.json');
-        const postsData = await readOrInit('posts.json');
-        const theme = getTheme(schedule.themeIndex);
-        const recentPosts = postsData.posts.slice(-10);
-
-        const content = await generatePost(schedule.themeIndex, recentPosts);
-        const channelId = process.env.DISCORD_CHANNEL_ID;
-        const discordMsg = await sendPost(channelId, theme, content);
-
-        const newPost = {
-          id: new Date().toISOString().split('T')[0] + '-forced',
-          date: new Date().toISOString(),
-          theme: theme.name,
-          themeIndex: schedule.themeIndex,
-          excerpt: content.slice(0, 120),
-          content,
-          discordMessageId: discordMsg?.id ?? null,
-          forced: true,
-          stats: { vues: null, likes: null, commentaires: null, clics: null, updatedAt: null },
-        };
-
-        postsData.posts.push(newPost);
-        await writeData('posts.json', postsData);
-
-        schedule.themeIndex = (schedule.themeIndex + 1) % 7;
-        schedule.postCount = (schedule.postCount || 0) + 1;
-        await writeData('schedule.json', schedule);
-
-        return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          `✅ Post généré et envoyé dans #linkedin-posts ! Thème : ${theme.emoji} ${theme.name}`);
-      }
-
-      return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        '❓ Commande inconnue.');
-    } catch (err) {
-      console.error('[interactions]', err);
-      return respond(res, InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        `⚠️ Erreur : ${err.message}`);
-    }
+    // Répondre immédiatement à Discord (< 3s)
+    return res.status(200).json({ type: 5, data: { flags: 64 } });
   }
 
   return res.status(400).end();
+}
+
+async function handleCommand(name, opt, appId, token) {
+  try {
+      const [
+        { readOrInit, writeData },
+        { getTheme },
+        { generateWeeklySummary, getLastUntrackedPost },
+        { getPostDaysLabel },
+      ] = await Promise.all([
+        import('../src/storage.js'),
+        import('../src/themes.js'),
+        import('../src/stats.js'),
+        import('../src/scheduler.js'),
+      ]);
+
+      if (name === 'next') {
+        const schedule = await readOrInit('schedule.json');
+        const theme = getTheme(schedule.themeIndex);
+        const postDays = getPostDaysLabel();
+        await followUp(appId, token, [
+          `📅 **Prochain post**`,
+          `Thème : ${theme.emoji} **${theme.name}**`,
+          `Jours de post cette semaine : ${postDays}`,
+          `Posts générés au total : ${schedule.postCount}`,
+        ].join('\n'));
+      }
+
+      else if (name === 'stats') {
+        const postsData = await readOrInit('posts.json');
+        const post = getLastUntrackedPost(postsData.posts);
+        if (!post) {
+          await followUp(appId, token, '❌ Aucun post sans stats. Génère un post avec `/generate`.');
+          return;
+        }
+        post.stats = {
+          vues: opt('vues'), likes: opt('likes'),
+          commentaires: opt('commentaires'), clics: opt('clics'),
+          updatedAt: new Date().toISOString(),
+        };
+        await writeData('posts.json', postsData);
+        const lines = [
+          `✅ **Stats sauvegardées** — ${post.id} (${post.theme})`,
+          opt('vues') ? `👀 ${Number(opt('vues')).toLocaleString('fr-FR')} vues` : null,
+          opt('likes') ? `❤️ ${opt('likes')} likes` : null,
+          opt('commentaires') ? `💬 ${opt('commentaires')} commentaires` : null,
+          opt('clics') ? `🔗 ${opt('clics')} clics` : null,
+        ].filter(Boolean).join('\n');
+        await followUp(appId, token, lines);
+      }
+
+      else if (name === 'summary') {
+        const postsData = await readOrInit('posts.json');
+        await followUp(appId, token, generateWeeklySummary(postsData.posts));
+      }
+
+      else if (name === 'generate') {
+        const schedule = await readOrInit('schedule.json');
+        const postsData = await readOrInit('posts.json');
+        const theme = getTheme(schedule.themeIndex);
+        await followUp(appId, token, `⏳ Génération en cours — thème : ${theme.emoji} ${theme.name}`);
+
+        const { generatePost } = await import('../src/claude.js');
+        const { sendPost } = await import('../src/discord.js');
+
+        const content = await generatePost(schedule.themeIndex, postsData.posts.slice(-10));
+        const discordMsg = await sendPost(process.env.DISCORD_CHANNEL_ID, theme, content);
+
+        postsData.posts.push({
+          id: new Date().toISOString().split('T')[0] + '-forced',
+          date: new Date().toISOString(),
+          theme: theme.name, themeIndex: schedule.themeIndex,
+          excerpt: content.slice(0, 120), content,
+          discordMessageId: discordMsg?.id ?? null, forced: true,
+          stats: { vues: null, likes: null, commentaires: null, clics: null, updatedAt: null },
+        });
+        await writeData('posts.json', postsData);
+        schedule.themeIndex = (schedule.themeIndex + 1) % 7;
+        schedule.postCount = (schedule.postCount || 0) + 1;
+        await writeData('schedule.json', schedule);
+        await followUp(appId, token, `✅ Post envoyé dans #linkedin-posts !`);
+      }
+
+      else {
+        await followUp(appId, token, '❓ Commande inconnue.');
+      }
+  } catch (err) {
+    console.error('[interactions]', name, err);
+    await followUp(appId, token, `⚠️ Erreur : ${err.message}`).catch(() => {});
+  }
 }

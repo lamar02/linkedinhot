@@ -7,9 +7,10 @@
     "register": "node scripts/register-commands.js"
   },
   "dependencies": {
-    "openai": "^4.104.0",
-    "@vercel/blob": "^0.27.0",
-    "discord-interactions": "^3.4.0"
+    "@vercel/blob": "^2.5.0",
+    "@vercel/functions": "^3.7.4",
+    "discord-interactions": "^3.4.0",
+    "openai": "^4.104.0"
   },
   "engines": {
     "node": ">=20"
