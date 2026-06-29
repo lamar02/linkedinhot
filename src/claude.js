@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import { getTheme } from './themes.js';
+import { searchTrends } from './search.js';
 
 const client = new OpenAI({
   apiKey: process.env.DEEPSEEK_API_KEY,
@@ -55,6 +56,18 @@ Génère UNIQUEMENT le texte du post, rien d'autre.`;
 export async function generatePost(themeIndex, recentPosts = []) {
   const theme = getTheme(themeIndex);
 
+  // Recherche actus récentes en parallèle
+  const [trends] = await Promise.all([
+    searchTrends(theme.name).catch(() => []),
+  ]);
+
+  let trendsContext = '';
+  if (trends.length > 0) {
+    trendsContext = `\n\nACTUALITÉS RÉCENTES (utilise si naturellement pertinent — ne force pas) :\n${
+      trends.map(t => `• ${t.title}${t.date ? ` (${t.date})` : ''} — ${t.snippet}`).join('\n')
+    }`;
+  }
+
   let performanceContext = '';
   const topPosts = recentPosts
     .filter(p => p.stats?.vues)
@@ -71,7 +84,7 @@ export async function generatePost(themeIndex, recentPosts = []) {
 Guidance : ${theme.promptHint}
 
 Idées d'accroches pour inspirer le style (ne les copie pas, crée quelque chose de frais) :
-${theme.hooks.map(h => `- ${h}`).join('\n')}${performanceContext}
+${theme.hooks.map(h => `- ${h}`).join('\n')}${performanceContext}${trendsContext}
 
 Génère le post maintenant.`;
 
