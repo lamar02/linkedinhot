@@ -58,26 +58,36 @@ async function handleCommand(name, opt, appId, token) {
   try {
       const [
         { readOrInit, writeData },
-        { getTheme },
         { generateWeeklySummary, getLastUntrackedPost },
         { getPostDaysLabel },
+        { getHistorySummary },
       ] = await Promise.all([
         import('../src/storage.js'),
-        import('../src/themes.js'),
         import('../src/stats.js'),
         import('../src/scheduler.js'),
+        import('../src/memory/history.js'),
       ]);
 
       if (name === 'next') {
-        const schedule = await readOrInit('schedule.json');
-        const theme = getTheme(schedule.themeIndex);
+        const [schedule, historySummary] = await Promise.all([
+          readOrInit('schedule.json'),
+          getHistorySummary(),
+        ]);
         const postDays = getPostDaysLabel();
-        await followUp(appId, token, [
-          `📅 **Prochain post**`,
-          `Thème : ${theme.emoji} **${theme.name}**`,
+        const lines = [
+          `📅 **Prochain post — GhostWriter v2**`,
           `Jours de post cette semaine : ${postDays}`,
           `Posts générés au total : ${schedule.postCount}`,
-        ].join('\n'));
+        ];
+        if (historySummary) {
+          const { typeCounts, avgScore, totalPosts } = historySummary;
+          const typeList = Object.entries(typeCounts).map(([t, n]) => `${t}: ${n}`).join(', ');
+          lines.push(`📊 Score moyen : ${avgScore}/10 (${totalPosts} posts)`);
+          lines.push(`📁 Répartition : ${typeList}`);
+        } else {
+          lines.push(`🤖 Le GhostWriter choisit le type dynamiquement (ratios: 40% histoire, 30% framework, 20% opinion, 10% actu)`);
+        }
+        await followUp(appId, token, lines.join('\n'));
       }
 
       else if (name === 'stats') {
@@ -109,30 +119,34 @@ async function handleCommand(name, opt, appId, token) {
       }
 
       else if (name === 'generate') {
-        const schedule = await readOrInit('schedule.json');
-        const postsData = await readOrInit('posts.json');
-        const theme = getTheme(schedule.themeIndex);
-        await followUp(appId, token, `⏳ Génération en cours — thème : ${theme.emoji} ${theme.name}`);
+        const [schedule, postsData] = await Promise.all([
+          readOrInit('schedule.json'),
+          readOrInit('posts.json'),
+        ]);
+        await followUp(appId, token, `⏳ GhostWriter en cours de génération…`);
 
-        const { generatePost } = await import('../src/claude.js');
+        const { generatePost } = await import('../src/generator/index.js');
         const { sendPost } = await import('../src/discord.js');
 
-        const content = await generatePost(schedule.themeIndex, postsData.posts.slice(-10));
-        const discordMsg = await sendPost(process.env.DISCORD_CHANNEL_ID, theme, content);
+        const { content, themeName, themeEmoji, meta } = await generatePost(postsData.posts.slice(-10));
+        const discordMsg = await sendPost(process.env.DISCORD_CHANNEL_ID, { name: themeName, emoji: themeEmoji }, content);
 
         postsData.posts.push({
-          id: new Date().toISOString().split('T')[0] + '-forced',
-          date: new Date().toISOString(),
-          theme: theme.name, themeIndex: schedule.themeIndex,
-          excerpt: content.slice(0, 120), content,
-          discordMessageId: discordMsg?.id ?? null, forced: true,
+          id:              new Date().toISOString().split('T')[0] + '-forced',
+          date:            new Date().toISOString(),
+          theme:           themeName,
+          contentType:     meta.contentType,
+          excerpt:         content.slice(0, 120),
+          content,
+          discordMessageId: discordMsg?.id ?? null,
+          forced:          true,
+          meta,
           stats: { vues: null, likes: null, commentaires: null, clics: null, updatedAt: null },
         });
         await writeData('posts.json', postsData);
-        schedule.themeIndex = (schedule.themeIndex + 1) % 7;
         schedule.postCount = (schedule.postCount || 0) + 1;
         await writeData('schedule.json', schedule);
-        await followUp(appId, token, `✅ Post envoyé dans #linkedin-posts !`);
+        await followUp(appId, token, `✅ Post envoyé ! Type: ${themeEmoji} ${themeName} | Score reviewer: ${meta.score}/10 | Rewrites: ${meta.rewriteCount}`);
       }
 
       else {

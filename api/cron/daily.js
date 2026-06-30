@@ -1,8 +1,7 @@
-import { generatePost } from '../../src/claude.js';
+import { generatePost } from '../../src/generator/index.js';
 import { sendPost, sendMessage } from '../../src/discord.js';
 import { isTodayPostDay, alreadyPostedToday, getNextSchedule } from '../../src/scheduler.js';
 import { readOrInit, writeData } from '../../src/storage.js';
-import { getTheme } from '../../src/themes.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'POST') {
@@ -27,21 +26,21 @@ export default async function handler(req, res) {
       return res.status(200).json({ skipped: true, reason: 'not_a_post_day' });
     }
 
-    const theme = getTheme(schedule.themeIndex);
     const recentPosts = postsData.posts.slice(-10);
-    const content = await generatePost(schedule.themeIndex, recentPosts);
+    const { content, themeName, themeEmoji, meta } = await generatePost(recentPosts);
 
-    const channelId = process.env.DISCORD_CHANNEL_ID;
-    const discordMsg = await sendPost(channelId, theme, content);
+    const theme = { name: themeName, emoji: themeEmoji };
+    const discordMsg = await sendPost(process.env.DISCORD_CHANNEL_ID, theme, content);
 
     const newPost = {
-      id: new Date().toISOString().split('T')[0],
-      date: new Date().toISOString(),
-      theme: theme.name,
-      themeIndex: schedule.themeIndex,
-      excerpt: content.slice(0, 120),
+      id:              new Date().toISOString().split('T')[0],
+      date:            new Date().toISOString(),
+      theme:           themeName,
+      contentType:     meta.contentType,
+      excerpt:         content.slice(0, 120),
       content,
       discordMessageId: discordMsg?.id ?? null,
+      meta,
       stats: { vues: null, likes: null, commentaires: null, clics: null, updatedAt: null },
     };
 
@@ -51,7 +50,7 @@ export default async function handler(req, res) {
     const newSchedule = { ...schedule, ...getNextSchedule(schedule) };
     await writeData('schedule.json', newSchedule);
 
-    return res.status(200).json({ ok: true, theme: theme.name, postCount: newSchedule.postCount });
+    return res.status(200).json({ ok: true, theme: themeName, score: meta.score, postCount: newSchedule.postCount });
   } catch (err) {
     console.error('[cron/daily]', err);
 

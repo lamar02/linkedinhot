@@ -1,0 +1,86 @@
+[
+  {
+    "id": "30_second_test",
+    "name": "Le 30 Second Test",
+    "description": "Mesurer si un utilisateur comprend un écran en moins de 30 secondes sans aide extérieure.",
+    "steps": [
+      "Montre l'écran à quelqu'un qui ne connaît pas le produit — pas un collègue, quelqu'un de l'extérieur",
+      "Ne dis rien. Ne guide pas. Chronomètre 30 secondes.",
+      "Demande : 'Qu'est-ce que tu ferais ici ?' — jamais 'Tu comprends ?' (réponse toujours oui)"
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "value_first_onboarding",
+    "name": "Value First Onboarding",
+    "description": "Ne jamais demander de données avant que l'utilisateur ait vécu sa première valeur concrète.",
+    "steps": [
+      "Identifie le moment 'aha' minimal du produit — la plus petite chose utile que tu peux livrer",
+      "Supprime tout ce qui précède ce moment dans l'onboarding",
+      "Collecte les données utilisateur seulement après le premier 'aha'"
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "conversation_flow",
+    "name": "Conversation Flow",
+    "description": "Structurer un formulaire comme une conversation naturelle, pas comme un questionnaire administratif.",
+    "steps": [
+      "Lis le formulaire à voix haute comme si tu le posais à quelqu'un en face de toi",
+      "Repère les questions qui sonnent bizarre, trop formelles, ou dans le mauvais ordre",
+      "Réorganise en commençant par la question la plus simple, celle à laquelle tout le monde peut répondre en 2 secondes"
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "prototype_first",
+    "name": "Prototype First",
+    "description": "Construire un prototype avant d'argumenter. Montre, ne raconte pas.",
+    "steps": [
+      "Si tu passes plus de 10 minutes à expliquer une idée en réunion, arrête",
+      "Construis un prototype en 2h max — même approximatif, même sans données réelles",
+      "Reviens avec le prototype. Les objections changent radicalement quand les gens voient quelque chose."
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "ux_roi_calculator",
+    "name": "UX ROI Calculator",
+    "description": "Chiffrer le coût de la mauvaise UX pour convaincre un stakeholder sceptique.",
+    "steps": [
+      "Identifie 3 frictions coûteuses mesurables : appels support, abandons, erreurs répétées",
+      "Calcule le coût par incident × fréquence mensuelle",
+      "Présente le coût de l'inaction, pas le prix du design. La question n'est pas 'combien coûte le designer' mais 'combien coûte ce bug UX par mois'"
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "design_system_v0",
+    "name": "Design System V0",
+    "description": "Créer la première version utilisable d'un design system sans tomber dans le perfectionnisme.",
+    "steps": [
+      "Audite tout le produit existant. Liste les incohérences — ne les corrige pas encore.",
+      "Prends les 10 composants les plus utilisés. Standardise uniquement ceux-là. Rien d'autre.",
+      "Documente les DÉCISIONS, pas juste les composants. Pourquoi ce bleu ? Pourquoi ce padding ? Sans ça, les règles disparaissent au prochain designer."
+    ],
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "brief_vs_problem",
+    "name": "Brief vs Problème Réel",
+    "description": "Distinguer ce que le client demande de ce dont les utilisateurs ont besoin.",
+    "steps": [
+      "Relis le brief. Souligne tous les verbes d'action : 'redesigner', 'ajouter', 'améliorer'.",
+      "Pour chaque verbe, pose la question : 'Quel comportement utilisateur ce changement va-t-il modifier ?'",
+      "Si tu ne peux pas répondre, le brief décrit une solution, pas un problème. Creuse avant de livrer."
+    ],
+    "used_count": 0,
+    "last_used": null
+  }
+]

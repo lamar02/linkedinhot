@@ -48,6 +48,9 @@ export const DEFAULTS = {
   'posts.json': {
     posts: [],
   },
+  'ghostwriter_history.json': {
+    entries: [],
+  },
 };
 
 export async function readOrInit(filename) {

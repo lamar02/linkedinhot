@@ -1,0 +1,83 @@
+[
+  {
+    "id": "contrarian_stop",
+    "type": "contrarian",
+    "pattern": "J'ai arrêté [pratique commune]. [Résultat inattendu].",
+    "example": "J'ai arrêté les personas. Le taux de rétention a augmenté de 23%.",
+    "score": 9.2,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "number_tension",
+    "type": "number",
+    "pattern": "[Chiffre] [unité]. [Conséquence inattendue en une phrase].",
+    "example": "47 maquettes. Les utilisateurs n'ouvraient pas la feature principale.",
+    "score": 8.8,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "confession_almost",
+    "type": "confession",
+    "pattern": "J'ai failli [erreur grave]. Ce qui s'est passé ensuite :",
+    "example": "J'ai failli livrer ce projet sans le tester. Ce qui s'est passé ensuite m'a coûté 3 semaines.",
+    "score": 9.0,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "comparison_unexpected",
+    "type": "comparison",
+    "pattern": "[Action design], c'est comme [analogie surprenante] : [pourquoi].",
+    "example": "Designer un onboarding, c'est comme écrire une blague : si tu dois l'expliquer, c'est raté.",
+    "score": 8.5,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "observation_sociale",
+    "type": "observation",
+    "pattern": "Je vois beaucoup de [profil] qui [comportement commun]. Ce qu'ils ratent :",
+    "example": "Je vois beaucoup de fondateurs qui redesignent leur app après un mauvais chiffre. Ils ratent l'essentiel.",
+    "score": 8.7,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "pivot_moment",
+    "type": "story",
+    "pattern": "En [période], [situation]. Puis [bascule en une phrase]. Voilà ce que j'ai appris.",
+    "example": "En 2023, j'acceptais tous les projets. Puis j'ai dit non à un client. Tout a changé.",
+    "score": 8.9,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "question_seche",
+    "type": "question",
+    "pattern": "[Question courte et directe qui dérange] (max 10 mots)",
+    "example": "Tu designs pour tes utilisateurs ou pour ton portfolio ?",
+    "score": 8.6,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "result_first",
+    "type": "result",
+    "pattern": "[Résultat chiffré surprenant]. Voilà comment on y est arrivés.",
+    "example": "+40% de rétention en supprimant une feature. Voilà comment on y est arrivés.",
+    "score": 8.8,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "client_said",
+    "type": "dialogue",
+    "pattern": "Le [client/CEO/dev] m'a dit : \"[citation directe]\". Ma réponse a tout changé.",
+    "example": "Le CEO m'a dit : 'Nos utilisateurs adorent l'app.' J'ai regardé les données. Ils la fermaient après 45 secondes.",
+    "score": 9.1,
+    "used_count": 0,
+    "last_used": null
+  }
+]

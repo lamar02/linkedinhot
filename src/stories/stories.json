@@ -1,0 +1,122 @@
+[
+  {
+    "id": "justice_gov",
+    "industry": "GovTech",
+    "emotion": "stress",
+    "context": "Refonte du portail Ministère de la Justice CI — formulaires administratifs complexes, agents non-tech",
+    "problem": "Les agents abandonnaient à mi-parcours sur les formulaires critiques de dossiers judiciaires",
+    "insight": "L'ordre des champs importait plus que leur design. On demandait la pièce d'identité en premier alors que c'était la dernière chose disponible.",
+    "lesson": "Un formulaire n'est pas un écran. C'est une conversation. Et toute conversation commence par la question la plus facile.",
+    "framework": "conversation_flow",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "design_system_chaos",
+    "industry": "SaaS B2B",
+    "emotion": "frustration",
+    "context": "Équipe de 4 designers, 18 mois de développement sans design system, composants dupliqués partout",
+    "problem": "47 nuances de bleu différentes dans le même produit. Les devs improvisaient à chaque sprint.",
+    "insight": "Un design system n'est pas un Figma. C'est un accord d'équipe. Sans documentation de décisions, les règles disparaissent à chaque nouveau membre.",
+    "lesson": "La première version d'un design system doit être ennuyeuse. Délibérément. Pas innovante. Juste cohérente.",
+    "framework": "design_system_v0",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "flutter_impossible",
+    "industry": "Mobile",
+    "emotion": "conflit",
+    "context": "Animation Flutter personnalisée, délai serré, désaccord technique avec le développeur lead",
+    "problem": "Le dev estimait l'animation à 2 semaines. Je pensais 2 jours. On n'était pas d'accord sur le composant à animer.",
+    "insight": "Le désaccord venait du fait qu'on ne parlait pas du même composant. Moi je voyais l'état final. Lui il voyait la transition.",
+    "lesson": "Avant d'argumenter sur une estimation, ouvre l'outil et construis le prototype. 2h de code valent 2 jours de réunion.",
+    "framework": "prototype_first",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "ecommerce_b2b_filters",
+    "industry": "E-commerce B2B",
+    "emotion": "surprise",
+    "context": "Catalogue produits B2B, 10 000 références, acheteurs professionnels sur desktop",
+    "problem": "67% des acheteurs appelaient le commercial pour trouver un produit. On pensait que c'était un problème de recherche.",
+    "insight": "Ils ne cherchaient pas. Ils combinaient des critères simultanément. Le moteur de recherche ne permettait pas ça.",
+    "lesson": "Observe ce que les gens font, pas ce qu'ils disent chercher. Ils disaient 'je ne trouve pas'. Ils voulaient dire 'je ne peux pas filtrer par X ET Y en même temps'.",
+    "framework": "30_second_test",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "health_app_dropout",
+    "industry": "Santé",
+    "emotion": "déclic",
+    "context": "App de suivi médical pour patients chroniques, onboarding de 12 étapes",
+    "problem": "80% des nouveaux utilisateurs abandonnaient à l'étape 4 : le formulaire de profil médical complet.",
+    "insight": "On demandait toutes les données avant que l'utilisateur ait eu la moindre valeur. La première chose qu'il voyait : 'Entrez vos 8 derniers médicaments'.",
+    "lesson": "La valeur d'abord. Les données après. L'utilisateur ne remplit un formulaire long que s'il sait ce qu'il va en retirer.",
+    "framework": "value_first_onboarding",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "stakeholder_ux_budget",
+    "industry": "Startup",
+    "emotion": "conflit",
+    "context": "Meeting budget Q3, pression cash, CEO qui voulait couper le budget design de 40%",
+    "problem": "Le CEO voyait le design comme un coût, pas un investissement. 'Les utilisateurs utilisent l'app quand même'.",
+    "insight": "J'ai calculé le coût de chaque ticket support qui venait d'une confusion interface. Sur 3 mois : 47h de support évitables = salaire d'un designer junior.",
+    "lesson": "Parle le langage du CEO : pertes et gains, pas pixels et empathie. Le ROI du design se mesure en heures de support évitées, en taux de conversion, en appels commerciaux réduits.",
+    "framework": "ux_roi_calculator",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "freelance_refus",
+    "industry": "Freelance",
+    "emotion": "doute",
+    "context": "Projet bien payé proposé par un client pressé qui voulait 'juste rendre ça beau'",
+    "problem": "J'allais accepter par peur de manquer le revenu. Le projet n'avait pas de brief, pas de métriques, pas d'utilisateurs définis.",
+    "insight": "Ce refus m'a coûté le projet. 3 semaines plus tard, un ancien client m'a recommandé pour un projet 2x mieux payé et 3x plus intéressant.",
+    "lesson": "Les meilleurs clients viennent quand tu arrêtes d'accepter n'importe quoi. Pas parce que tu fais le difficile. Parce que tu as du temps pour les bons projets.",
+    "framework": null,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "vivatech_ci_2026",
+    "industry": "Tech Afrique",
+    "emotion": "fierté",
+    "context": "VivaTech Paris 2026 — 20 startups ivoiriennes + 10 PME numériques présentes, Macron au stand CI",
+    "problem": "Ces startups avaient des interfaces pensées pour des démos à Paris, pas pour leurs vrais utilisateurs à Abidjan ou Bouaké.",
+    "insight": "Le vrai risque pour l'écosystème CI : construire pour impressionner les VCs étrangers plutôt que pour résoudre de vrais problèmes locaux.",
+    "lesson": "Exporter son produit commence par exporter sa compréhension de l'utilisateur. Un bouton 'Investir maintenant' ne veut rien dire à quelqu'un qui n'a jamais ouvert un compte titres.",
+    "framework": null,
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "edu_onboarding",
+    "industry": "Éducation",
+    "emotion": "curiosité",
+    "context": "Plateforme e-learning pour collégiens ivoiriens, taux d'activation de 12% après inscription",
+    "problem": "Les élèves s'inscrivaient mais n'ouvraient jamais le premier cours. On pensait que c'était le contenu.",
+    "insight": "C'était l'interface du premier cours. Trop de texte, pas d'indication de durée, pas de progression visible. Les élèves ne savaient pas ce qu'ils allaient 'gagner'.",
+    "lesson": "La motivation d'un élève de 13 ans est : 'Combien de temps ça prend ? Est-ce que je vais réussir ? Qu'est-ce que j'obtiens si je termine ?' Design pour ça, pas pour la beauté.",
+    "framework": "value_first_onboarding",
+    "used_count": 0,
+    "last_used": null
+  },
+  {
+    "id": "logistics_driver_app",
+    "industry": "Logistique",
+    "emotion": "surprise",
+    "context": "App chauffeurs-livreurs, smartphones Android d'entrée de gamme, réseau 3G variable",
+    "problem": "Les chauffeurs n'utilisaient pas l'app pour confirmer les livraisons. Ils appelaient le dispatch à la place.",
+    "insight": "L'app prenait 8 secondes à charger la page de confirmation. Un appel téléphonique prenait 15 secondes. Ils choisissaient l'appel.",
+    "lesson": "La performance EST une feature UX. Sur des appareils à 50 000 FCFA avec 3G, chaque seconde de chargement est une décision de design.",
+    "framework": "30_second_test",
+    "used_count": 0,
+    "last_used": null
+  }
+]
