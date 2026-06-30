@@ -51,13 +51,24 @@ RÈGLES pour créer de la vraie valeur :
 
 8. CTA qui crée de l'échange — une question qui invite le lecteur à partager son propre vécu, pas un pitch commercial.
 
-TYPES DE POSTS — varie entre ces formats (ne fais pas toujours le même) :
-→ **Narratif éducatif** : histoire vraie → problème → décision → résultat → leçon réutilisable
-→ **Framework** : "Voici la méthode exacte que j'utilise pour [X]" avec étapes concrètes
-→ **Contre-intuitif** : "Tout le monde pense X. Après Y années de terrain, je pense le contraire. Voici pourquoi."
-→ **Avant/Après** : ce que je faisais avant vs ce que je fais maintenant, et pourquoi le changement
-→ **Analyse d'actu** : une actualité tech/design → ce que ça signifie vraiment pour les practitioners
-→ **Question + réponse** : une question que j'entends souvent → ma réponse honnête basée sur l'expérience
+DONNÉES ALGORITHMIQUES LINKEDIN 2026 — optimise pour ça :
+→ Un **SAVE** vaut 5x plus qu'un like en reach. Objectif : créer du contenu que les gens bookmarkent pour y revenir (frameworks, règles, checklists mentales)
+→ Un **commentaire de 15+ mots** vaut 2.5x plus qu'un commentaire court → termine par une question qui provoque une vraie réponse réfléchie
+→ **1000-1300 caractères** = sweet spot pour text posts (ni trop court ni trop long)
+→ **Spécificité** = crédibilité + saves. Les posts avec chiffres précis et noms de contextes sont bookmarkés
+
+LES 4 HOOKS QUI PERFORMENT LE MIEUX (utilise-les en rotation) :
+1. **Déclaration contre-intuitive** : "Tout le monde te dit de X. C'est faux." / "J'ai arrêté de faire X. Mes résultats ont doublé."
+2. **Chiffre précis + tension** : "J'ai analysé 47 interfaces en 3 semaines. Un seul pattern explique 80% des abandons."
+3. **Confession de pain point** : "J'ai failli perdre ce client à cause d'un détail que j'avais ignoré." / "Mon premier instinct était mauvais."
+4. **Comparaison inattendue** : "Designer une app mobile, c'est comme écrire une blague : si tu dois l'expliquer, c'est raté."
+
+STRUCTURE GAGNANTE (varie entre ces formats) :
+→ **The Lesson** : confession laide → action généreuse → insight gagné (le plus bookmarké)
+→ **The Story** : tension → turning point → cliffhanger résolu → leçon
+→ **Framework** : "Voici la méthode exacte que j'utilise pour [X]" → 3 étapes nommées → résultat mesurable
+→ **Contre-intuitif** : croyance commune → pourquoi c'est faux → ce que tu fais à la place
+→ **Avant/Après** : "Avant je faisais X. Maintenant je fais Y. Voilà ce qui a changé."
 
 FORMAT — lisibilité maximale, valeur perçue en 5 secondes :
 
@@ -81,6 +92,14 @@ CTA : une question sincère qui invite au partage d'expérience. Pas un pitch co
 200-280 mots MAX — la concision EST la valeur.
 
 Langue : français. Termes techniques en anglais OK.
+
+SIGNAUX D'UN POST QUI VA FLOPPER (éviter absolument) :
+❌ "Dans le monde du design..." ou "En tant que designer..."
+❌ Liste de 5 conseils génériques sans histoire concrète derrière
+❌ Phrases vagues : "il faut écouter les utilisateurs", "l'IA change tout"
+❌ Ton conférencier / guru — parle comme quelqu'un qui raconte une vraie expérience
+❌ "Voici mes X apprentissages" sans chiffres ou situations précises
+❌ Conclusion moralisatrice : "N'oubliez pas que..." / "Rappellez-vous toujours..."
 
 Génère UNIQUEMENT le texte du post. Commence directement par la première phrase d'accroche. Zéro introduction, zéro "voici le post", zéro séparateur "---". Juste le post brut, prêt à coller sur LinkedIn.`;
 
