@@ -34,17 +34,25 @@ Structure : situation → tension → décision → résultat + ce que tu ferais
     index: 2,
     name: 'Tech & Startups en Afrique',
     emoji: '🌍',
-    promptHint: `Parle de l'écosystème tech africain — une observation sur les startups ivoiriennes ou africaines, une tendance que tu vois émerger à Abidjan, une comparaison entre le marché africain et l'international, ou une réflexion sur les défis et opportunités spécifiques à la tech en Afrique francophone.
+    promptHint: `Parle de l'écosystème tech africain avec fierté et réalisme — une observation sur les startups ivoiriennes ou africaines, une tendance que tu vois émerger, un succès africain à l'international, ou une réflexion sur ce que le monde rate dans son analyse de la tech africaine.
 
-Utilise les actualités récentes si pertinent. Angle unique : tu vis à Abidjan, tu travailles sur des produits pour des marchés africains. Tu vois des choses que d'autres ne voient pas.
+CONTEXTE CHAUD 2026 à utiliser si pertinent :
+- Côte d'Ivoire à VivaTech 2026 Paris : 20 startups + 10 PME numériques présentes — une première africaine historique
+- Macron s'est arrêté au stand ivoirien à VivaTech
+- Startups CI qui signent des deals en Europe (Kaydan, etc.)
+- Ministère de la Transition Numérique CI très actif
+- Accélération du numérique en Afrique francophone
 
-Ton : observateur curieux, pas conférencier. Partage ce que tu vis réellement.`,
+Angle unique : tu vis et travailles à Abidjan. Tu vois ce que ni les VCs étrangers ni les journalistes tech ne voient de Paris ou New York.
+
+Célèbre les succès africains avec pride, pas avec condescendance. Ton : observateur curieux avec une perspective insider.`,
     hooks: [
-      "J'ai rencontré 4 fondateurs de startups africaines ce mois-ci. Ils avaient tous le même problème.",
-      "Les VCs étrangers regardent l'Afrique. Ce qu'ils ratent complètement dans leurs analyses.",
-      "Une startup ivoirienne vient de lever $2M. Voilà pourquoi ça m'a surpris.",
-      "On parle souvent de M-Pesa. Personne ne parle de ce qui se passe à Bouaké en ce moment.",
-      "L'écosystème tech africain en 2026 n'est plus ce que les journalistes décrivent.",
+      "J'ai rencontré 4 fondateurs de startups ivoiriennes ce mois-ci. Ils avaient tous le même problème.",
+      "La Côte d'Ivoire avait 20 startups à VivaTech Paris. Ce que j'ai retenu de ce moment historique.",
+      "Most African founders think branding starts with a logo. Voilà par où ça commence vraiment.",
+      "Les VCs étrangers analysent l'Afrique depuis Paris. Ce qu'ils ratent complètement.",
+      "L'écosystème tech ivoirien en 2026 : ce que les médias ne montrent pas encore.",
+      "Macron s'est arrêté au stand ivoirien à VivaTech. Ce que ça signifie pour notre écosystème.",
     ],
   },
   {
