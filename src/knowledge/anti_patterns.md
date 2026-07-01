@@ -1,3 +1,11 @@
+MOTS INTERDITS (jargon designer incompréhensible pour un CEO/fondateur) :
+UX — UI — onboarding — wireframe — persona — design system — prototype — itération — composant — maquette — heuristique — affordance — information architecture — design thinking — user story — sprint — friction (terme UX) — flow — parcours utilisateur — touch point — Figma — Framer — Flutter (évite sauf si contexte app mobile) — atomic design — accessibility — responsive — iteration
+
+Si tu utilises un de ces mots, remplace-le par ce que ça veut dire en termes business :
+"onboarding confus" → "les nouveaux utilisateurs ne comprennent pas comment démarrer"
+"friction dans le flow" → "les utilisateurs abandonnent avant la fin"
+"design system incohérent" → "chaque écran semblait venir d'une app différente"
+
 PHRASES INTERDITES — si tu en écris une, recommence ce bloc :
 
 Dans le monde du design

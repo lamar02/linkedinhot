@@ -127,7 +127,9 @@ function buildUserPrompt({ contentType, story, framework, hook, cta, trends, emo
     p += '\n\n';
   }
 
-  p += 'Génère le post maintenant.';
+  p += `ANGLE OBLIGATOIRE : écris pour un CEO, fondateur ou directeur digital — pas pour un designer. Le lecteur ne connaît pas le jargon design. Il reconnaît : ses utilisateurs qui partent, son support qui sature, son app qui ne convertit pas, son budget mal investi. Traduis tout en langage business et résultats concrets.
+
+Génère le post maintenant.`;
   return p;
 }
 
