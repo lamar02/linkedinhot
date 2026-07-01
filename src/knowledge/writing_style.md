@@ -24,6 +24,6 @@ Le CTA est une vraie question qui invite le lecteur à partager son expérience.
 
 3-5 hashtags, dernière ligne, séparés par des espaces.
 
-200-260 mots MAX. La concision est la valeur.
+200-220 mots MAX. La concision est la valeur. Au-delà de 220 mots, coupe sans pitié.
 
 Pas de markdown dans le post (# ## ---). LinkedIn est du texte brut.

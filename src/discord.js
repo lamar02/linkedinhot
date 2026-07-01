@@ -19,18 +19,18 @@ async function discordRequest(method, path, body) {
 }
 
 export async function sendPost(channelId, theme, content) {
+  const header = `📝 **POST LINKEDIN DU JOUR** | ${theme.emoji} ${theme.name}`;
+  const footer = '📊 Poste sur LinkedIn, puis reviens noter avec `/stats`';
   const separator = '─'.repeat(40);
-  const message = [
-    `📝 **POST LINKEDIN DU JOUR** | ${theme.emoji} ${theme.name}`,
-    '',
-    separator,
-    '',
-    content,
-    '',
-    separator,
-    '',
-    '📊 Après avoir posté sur LinkedIn, reviens noter tes résultats avec `/stats`',
-  ].join('\n');
+
+  // Discord limit: 2000 chars. Calculate budget for the post content.
+  const overhead = header.length + footer.length + separator.length * 2 + 8; // newlines
+  const maxContent = 2000 - overhead;
+  const trimmedContent = content.length > maxContent
+    ? content.slice(0, maxContent - 3).trimEnd() + '…'
+    : content;
+
+  const message = [header, '', separator, '', trimmedContent, '', separator, '', footer].join('\n');
 
   return discordRequest('POST', `/channels/${channelId}/messages`, { content: message });
 }
